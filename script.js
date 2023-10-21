@@ -1,23 +1,23 @@
 const data = [
   {
     id: 1,
-    title: "The Lord of the Rings",
-    publicationDate: "1954-07-29",
-    author: "J. R. R. Tolkien",
+    title: 'The Lord of the Rings',
+    publicationDate: '1954-07-29',
+    author: 'J. R. R. Tolkien',
     genres: [
-      "fantasy",
-      "high-fantasy",
-      "adventure",
-      "fiction",
-      "novels",
-      "literature",
+      'fantasy',
+      'high-fantasy',
+      'adventure',
+      'fiction',
+      'novels',
+      'literature',
     ],
     hasMovieAdaptation: true,
     pages: 1216,
     translations: {
-      spanish: "El señor de los anillos",
-      chinese: "魔戒",
-      french: "Le Seigneur des anneaux",
+      spanish: 'El señor de los anillos',
+      chinese: '魔戒',
+      french: 'Le Seigneur des anneaux',
     },
     reviews: {
       goodreads: {
@@ -34,15 +34,15 @@ const data = [
   },
   {
     id: 2,
-    title: "The Cyberiad",
-    publicationDate: "1965-01-01",
-    author: "Stanislaw Lem",
+    title: 'The Cyberiad',
+    publicationDate: '1965-01-01',
+    author: 'Stanislaw Lem',
     genres: [
-      "science fiction",
-      "humor",
-      "speculative fiction",
-      "short stories",
-      "fantasy",
+      'science fiction',
+      'humor',
+      'speculative fiction',
+      'short stories',
+      'fantasy',
     ],
     hasMovieAdaptation: false,
     pages: 295,
@@ -62,14 +62,14 @@ const data = [
   },
   {
     id: 3,
-    title: "Dune",
-    publicationDate: "1965-01-01",
-    author: "Frank Herbert",
-    genres: ["science fiction", "novel", "adventure"],
+    title: 'Dune',
+    publicationDate: '1965-01-01',
+    author: 'Frank Herbert',
+    genres: ['science fiction', 'novel', 'adventure'],
     hasMovieAdaptation: true,
     pages: 658,
     translations: {
-      spanish: "",
+      spanish: '',
     },
     reviews: {
       goodreads: {
@@ -82,16 +82,16 @@ const data = [
   {
     id: 4,
     title: "Harry Potter and the Philosopher's Stone",
-    publicationDate: "1997-06-26",
-    author: "J. K. Rowling",
-    genres: ["fantasy", "adventure"],
+    publicationDate: '1997-06-26',
+    author: 'J. K. Rowling',
+    genres: ['fantasy', 'adventure'],
     hasMovieAdaptation: true,
     pages: 223,
     translations: {
-      spanish: "Harry Potter y la piedra filosofal",
-      korean: "해리 포터와 마법사의 돌",
-      bengali: "হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন",
-      portuguese: "Harry Potter e a Pedra Filosofal",
+      spanish: 'Harry Potter y la piedra filosofal',
+      korean: '해리 포터와 마법사의 돌',
+      bengali: 'হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন',
+      portuguese: 'Harry Potter e a Pedra Filosofal',
     },
     reviews: {
       goodreads: {
@@ -108,17 +108,17 @@ const data = [
   },
   {
     id: 5,
-    title: "A Game of Thrones",
-    publicationDate: "1996-08-01",
-    author: "George R. R. Martin",
-    genres: ["fantasy", "high-fantasy", "novel", "fantasy fiction"],
+    title: 'A Game of Thrones',
+    publicationDate: '1996-08-01',
+    author: 'George R. R. Martin',
+    genres: ['fantasy', 'high-fantasy', 'novel', 'fantasy fiction'],
     hasMovieAdaptation: true,
     pages: 835,
     translations: {
-      korean: "왕좌의 게임",
-      polish: "Gra o tron",
-      portuguese: "A Guerra dos Tronos",
-      spanish: "Juego de tronos",
+      korean: '왕좌의 게임',
+      polish: 'Gra o tron',
+      portuguese: 'A Guerra dos Tronos',
+      spanish: 'Juego de tronos',
     },
     reviews: {
       goodreads: {
@@ -142,3 +142,80 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+//NOTE 1. Destructuring
+const book = getBook(2);
+book;
+
+//the normal way in js
+// const title = book.title;
+// const author = book.author;
+
+//the desturcturing object
+const {
+  title,
+  author,
+  pages,
+  publicationDate,
+  genres,
+  hasMovieAdaptation,
+  reviews,
+} = book;
+title;
+author;
+genres;
+
+//The desturturing array
+// const [primaryGenres, secondGenres] = genres;
+// primaryGenres;
+// secondGenres;
+
+//NOTE
+//Rest operator
+const [primaryGenres, secondGenres, ...reminingGenres] = genres;
+reminingGenres;
+
+//Spread operator on array
+const newGenres = [genres, 'TheNewGenres'];
+newGenres;
+
+const spreadGenres = [...genres, 'theNenGenres'];
+spreadGenres;
+
+//Spread operator on object for adding new properties
+const updatedBook = { ...book, moviePublicationDate: '2001-12-19' };
+updatedBook;
+
+//Spread operator on obejct for updating the existing object (Not mutate)
+const overWriteBook = {
+  ...book,
+  moviePublicationDate: '2001-12-19',
+  //adding the new properties, overwrite, the spread operator must put first
+  pages: 300,
+};
+overWriteBook;
+
+//NOTE Template literal ES6 easily re-write string
+
+//NOTE ternary operator instead of if-else statement
+
+const pagesRange = pages < 2000 ? 'yes' : 'no';
+pagesRange;
+
+//NOTE Arrow function review (quick and short )
+//old way (function expression)
+// function getYear(string) {
+//   return string.split('-')[0];
+// }
+//new way (function declration)
+const getYear = (str) => str.split('-')[0];
+console.log(getYear(publicationDate));
+
+const summary = `${title} is a book with ${pages} long book written by ${author} and published on ${getYear(
+  publicationDate
+)}. The book has ${hasMovieAdaptation ? '' : 'not'} been adapted as a movie`;
+summary;
+
+//NOTE Short circuiting and logical operators (&& or ||)
+// In some circumstance the operator will look at the first value
+// and return immediately without even look at the second value

@@ -164,6 +164,7 @@ const {
 title;
 author;
 genres;
+reviews;
 
 //The desturturing array
 // const [primaryGenres, secondGenres] = genres;
@@ -219,3 +220,45 @@ summary;
 //NOTE Short circuiting and logical operators (&& or ||)
 // In some circumstance the operator will look at the first value
 // and return immediately without even look at the second value
+console.log(true && 'return true?');
+console.log(false && 'return true?');
+console.log(hasMovieAdaptation && 'this book has a movie');
+console.log(!hasMovieAdaptation && 'this book has a movie');
+
+//NOTE Truthy and Falsy Values
+//Falsy : false , 0, -0, "" ,null, undefined, NaN
+//Truthy: anyother value beside Falsy
+
+console.log('victor' && 'This is a turthy value');
+console.log(0 && 'This is a falsy value');
+
+console.log(true || 'something');
+console.log(false || 'something');
+
+console.log(book.translations.spanish);
+//Can set a fallback value incase there is no value
+const spanishTranslation = book.translations.spanish || 'Not translated';
+console.log(spanishTranslation);
+
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || 'no data';
+// console.log(countWrong);
+
+//Important concept : nullish coalescing operator  ??
+// This operator will only return the second value when the first value is null or undefind
+// but not when the value is 0 or string
+// const count = book.reviews.librarything.reviewsCount ?? 'no data';
+// console.log(count);
+
+//NOTE Optional chaining
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  goodreads;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+  // return reviewCount;
+}
+
+console.log(getTotalReviewCount(book));

@@ -22,4 +22,11 @@ Truthy: anyother value beside Falsy<br>
 // but not when the value is 0 or string <br>
 <br>
 
-//Optional Chaining
+//Optional Chaining<br>
+<br>
+functional array method <br>
+
+1. Map<br>
+2. Filter<br>
+3. Reduce<br>
+4. Sort<br>

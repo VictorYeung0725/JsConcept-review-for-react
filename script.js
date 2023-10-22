@@ -143,6 +143,7 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
+/*
 //NOTE 1. Destructuring
 const book = getBook(2);
 book;
@@ -262,3 +263,54 @@ function getTotalReviewCount(book) {
 }
 
 console.log(getTotalReviewCount(book));
+*/
+
+//NOTE Three functional array method
+//NOTE1. Map
+
+const books = getBooks();
+const x = [1, 2, 3, 4, 5].map((num) => num * 2);
+x;
+
+const author = books.map((book) => book.author);
+author;
+const titles = books.map((book) => book.title);
+titles;
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+
+const essentialData1 = books.map((book) => {
+  //inside the {} curly braces
+  //Javascript will does not return anything + it see this as a declration block
+  // To solved this add a return statement
+  //Method 1
+  return {
+    title: book.title,
+    author: book.author,
+  };
+});
+
+//method 2 wrap the entire code inside a ()
+const essentialData2 = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+
+essentialData1;
+essentialData2;
+
+//NOTE 2. Filter
+const longBooks = books
+  .filter((book) => book.pages > 500 && book.pages < 800)
+  .map((newBookArray) => {
+    return {
+      author: newBookArray.author,
+      title: newBookArray.title,
+    };
+  });
+longBooks;

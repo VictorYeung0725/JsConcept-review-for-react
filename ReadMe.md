@@ -30,3 +30,7 @@ functional array method <br>
 2. Filter<br>
 3. Reduce<br>
 4. Sort<br>
+5. immutable array<br>update,insert,delete<br>
+
+<br>
+Promise && Async Await

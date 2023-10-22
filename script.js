@@ -306,7 +306,7 @@ essentialData2;
 
 //NOTE 2. Filter
 const longBooks = books
-  .filter((book) => book.pages > 500 && book.pages < 800)
+  .filter((book) => book.pages > 500)
   .map((newBookArray) => {
     return {
       author: newBookArray.author,
@@ -314,3 +314,42 @@ const longBooks = books
     };
   });
 longBooks;
+console.log(longBooks);
+
+//filter book generes with adventure
+const adventureBooks = books.filter((book) =>
+  book.genres.includes('adventure')
+);
+// .map((adven) => adven.author);
+adventureBooks;
+
+//NOTE Reduce perform math method with number
+const pageNeedToRead = adventureBooks.reduce((acc, cur) => acc + cur.pages, 0);
+pageNeedToRead;
+
+const arr = [1, 5, 6, 3, 9, 2];
+// const sortedX = arr.sort((a, b) => a - b);
+const sortedX = arr.slice().sort((a, b) => a - b);
+sortedX;
+arr;
+
+//NOTE Imutable Array
+//1. Add book object to the array
+const newBook = {
+  id: 6,
+  title: 'victor',
+};
+const bookAfterNewAdd = [...books, newBook];
+bookAfterNewAdd;
+
+//2. Delete book object after array
+const bookAfterDelete = bookAfterNewAdd.filter(
+  (removeBook) => removeBook.id !== 6
+);
+bookAfterDelete;
+
+//3.updated the book object in an array
+const bookAfterUpdated = bookAfterDelete.map((book) =>
+  book.id === 1 ? {} : book
+);
+bookAfterUpdated;
